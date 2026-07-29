@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "View Students";
+    // Controller se aayi hui lists ko yahan receive karenge
+    var bcaList = ViewBag.BcaStudents as List<Studentmanagmentsystem.Models.Student>;
+    var mcaList = ViewBag.McaStudents as List<Studentmanagmentsystem.Models.Student>;
+}
+
+<div class="container-fluid mt-4">
+
+    <div style="margin-bottom: 20px;">
+        <a href="/Account/Dashboard" style="text-decoration: none; background-color: #212529; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-family: sans-serif;">
+            🏠 Home
+        </a>
+    </div>
+
+    <h2 class="text-center text-primary mb-4">Course-wise Student Lists</h2>
+    <div class="mb-3 text-end">
+        <a href="/Student/Add" class="btn btn-primary">➕ Add New Student</a>
+    </div>
+    <hr />
+
+    <!-- BCA STUDENTS TABLE -->
+    <h3 class="mt-4 text-info">BCA Students</h3>
+    <div class="table-responsive shadow mb-5">
+        <table class="table table-bordered table-striped table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Enrollment No</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Course</th>
+                    <th>Address</th>
+                    <th>Admission Date</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (bcaList != null && bcaList.Count > 0)
+                {
+                    foreach (var student in bcaList)
+                    {
+                        <tr>
+                            <td>@student.StudentId</td>
+                            <td>@student.StudentName</td>
+                            <td>@student.EnrollmentNumber</td>
+                            <td>@student.Email</td>
+                            <td>@student.MobileNumber</td>
+                            <td>@student.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                            <td>@student.Gender</td>
+                            <td><span class="badge bg-info text-dark">@student.Course</span></td>
+                            <td>@student.Address</td>
+                            <td>@student.AdmissionDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <a href="/Student/Update/@student.StudentId" class="btn btn-warning btn-sm">Update</a>
+                            </td>
+                            <td>
+                                <a href="/Student/Delete/@student.StudentId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="12" class="text-center text-danger">No BCA Students Found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+   
+            
+        </table>
+    </div>
+
+</div>

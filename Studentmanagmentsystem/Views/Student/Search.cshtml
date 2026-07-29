@@ -1,0 +1,88 @@
+﻿@model List<Studentmanagmentsystem.Models.Student>
+@{
+    ViewData["Title"] = "Search Student";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-start mb-2">
+        <a href="/Account/Dashboard" class="btn btn-dark fw-bold shadow-sm" style="border-radius: 8px;">
+            🏠 Home
+        </a>
+    </div>
+    <h2 class="text-center text-primary mb-4">🔍 Search Student</h2>
+    <hr />
+
+    <!-- Search Form -->
+    <div class="card shadow p-4 mb-5">
+        <form action="/Student/Search" method="get" class="row g-3 align-items-end">
+
+            <!-- Exact Name Input -->
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Student Name (Exact Match)</label>
+                <input type="text" name="query" class="form-control" placeholder="Enter Full Name (e.g. Rahul Kumar)" value="@ViewBag.SearchQuery" required />
+            </div>
+
+            <!-- Course Dropdown -->
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Select Course</label>
+                <select name="course" class="form-select">
+                    <option value="BCA" selected="@(ViewBag.SearchCourse == "BCA" ? "selected" : null)">BCA</option>
+                   
+                </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Search Results Table -->
+    @if (Model != null && Model.Count > 0)
+    {
+        <h4 class="text-success mb-3">Search Results:</h4>
+        <div class="table-responsive shadow">
+            <table class="table table-bordered table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Enrollment No</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td>@student.StudentId</td>
+                            <td>@student.StudentName</td>
+                            <td>@student.EnrollmentNumber</td>
+                            <td>@student.Email</td>
+                            <td>
+                                <span class="badge @(student.Course == "BCA" ? "bg-info text-dark" : "bg-success")">
+                                    @student.Course
+                                </span>
+                            </td>
+                            <td>
+                                <a href="/Student/Update/@student.StudentId" class="btn btn-warning btn-sm">Update</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else if (Context.Request.Query.ContainsKey("query"))
+    {
+        <!-- Agar student nahi milta hai -->
+        <div class="alert alert-danger text-center shadow">
+            <strong>No Record Found!</strong> Koi aisa student nahi mila jiska exact naam "<b>@ViewBag.SearchQuery</b>" ho aur course matched ho.
+        </div>
+    }
+
+</div>

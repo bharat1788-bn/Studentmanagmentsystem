@@ -1,0 +1,108 @@
+﻿@model List<Studentmanagmentsystem.Models.Student>
+
+@{
+    ViewData["Title"] = "Student Report";
+}
+
+<!-- PDF generate karne ke liye HTML2PDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-start mb-2">
+        <a href="/Account/Dashboard" class="btn btn-dark fw-bold shadow-sm" style="border-radius: 8px;">
+            🏠 Home
+        </a>
+    </div>
+
+    <!-- PDF Download Button -->
+    <div class="text-end mb-3">
+        <button class="btn btn-danger shadow" onclick="generatePDF()">
+            📄 Download as PDF
+        </button>
+    </div>
+
+    <!-- Yeh wo area hai jo PDF mein convert hoga -->
+    <div id="report-content" class="p-4 bg-white border shadow-sm">
+
+        <h2 class="text-center text-primary mb-4">Student Reports</h2>
+        <hr />
+
+        <!-- Summary Cards -->
+        <div class="row text-center mb-5 mt-4">
+            <div class="col-md-4">
+                <div class="card bg-light border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Total Students</h5>
+                        <h2 class="text-dark">@ViewBag.TotalStudents</h2>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+        
+
+        <!-- Detailed Student List Table -->
+        <h4 class="mb-3">Detailed Student List</h4>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Enrollment No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var student in Model)
+                    {
+                        <tr>
+                            <td>@student.StudentId</td>
+                            <td class="fw-bold">@student.StudentName</td>
+                            <td>
+                                <span class="badge @(student.Course == "BCA" ? "bg-info text-dark" : "bg-success")">
+                                    @student.Course
+                                </span>
+                            </td>
+                            <td>@student.EnrollmentNumber</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-danger">No student data available for the report.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4 text-muted" style="font-size: 12px;">
+            <p>Report Generated On: @DateTime.Now.ToString("dd MMM yyyy, hh:mm tt")</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PDF Generate karne ka JavaScript function -->
+<script>
+    function generatePDF() {
+        // Kis div ko PDF banana hai usko select karein
+        const element = document.getElementById('report-content');
+
+        // PDF ki settings
+        const opt = {
+            margin:       0.5,
+            filename:     'Student_Report.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        // PDF download karwayein
+        html2pdf().set(opt).from(element).save();
+    }
+</script>

@@ -1,0 +1,89 @@
+﻿@model Studentmanagmentsystem.Models.Student
+
+@{
+    ViewData["Title"] = "Update Student";
+}
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-start mb-2">
+        <a href="/Account/Dashboard" class="btn btn-dark fw-bold shadow-sm" style="border-radius: 8px;">
+            🏠 Home
+        </a>
+    </div>
+
+    <h2 class="text-center">Update Student</h2>
+    <hr />
+
+    <form asp-action="Update" method="post">
+        
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Student ID</label>
+                <input asp-for="StudentId" class="form-control" readonly />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Student Name</label>
+                <input asp-for="StudentName" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Enrollment Number</label>
+                <input asp-for="EnrollmentNumber" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Mobile Number</label>
+                <input asp-for="MobileNumber" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Date of Birth</label>
+               <input asp-for="DateOfBirth" type="date" class="form-control" />
+
+
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Gender</label>
+                <select asp-for="Gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Course</label>
+                <select asp-for="Course" class="form-control">
+                    <option>BCA</option>
+                   
+                </select>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label>Address</label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Admission Date</label>
+                <input asp-for="AdmissionDate" type="date" class="form-control" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Student</button>
+        <a href="/Student/Index" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

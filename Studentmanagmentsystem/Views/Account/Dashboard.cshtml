@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div style="min-height:100vh; background:#f5f5f5; font-family: sans-serif;">
+
+    <!-- 1. TOP NAVBAR WITH HAMBURGER (3 LINES) -->
+    <div style="background:#0d3b66; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+        <h2 style="margin:0; font-size: 24px; font-weight:bold;">🎓 BCA College</h2>
+
+        <!-- 3-Line Button -->
+        <button onclick="toggleMenu()" style="background:none; border:none; color:white; font-size:28px; cursor:pointer;">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- HIDDEN MENU OPTIONS (Click karne par dikhega) -->
+    <div id="mobileMenu" style="display:none; background:#0b2e4f; padding: 15px 30px; flex-direction: column; gap: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <a href="/Account/Dashboard" style="color:white; text-decoration:none; font-weight:bold; font-size: 16px;">🏠 Home</a>
+        <a href="/Student/Add" style="color:white; text-decoration:none; font-size: 16px;">➕ Add Student</a>
+        <a href="/Student/Index" style="color:white; text-decoration:none; font-size: 16px;">📋 View Students</a>
+        <a href="/Student/Search" style="color:white; text-decoration:none; font-size: 16px;">🔍 Search Student</a>
+        <a href="/Student/Report" style="color:white; text-decoration:none; font-size: 16px;">📊 Report</a>
+        <a href="/Account/ChangePassword" style="color:white; text-decoration:none; font-size: 16px;">🔑 Change Password</a>
+        <a href="/Account/Logout" style="color:#ff6b6b; text-decoration:none; font-weight:bold; font-size: 16px;">🚪 Logout</a>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div style="padding:30px; max-width: 1000px; margin: auto;">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #0d3b66; font-weight: bold;">Welcome Admin</h1>
+            <p class="text-muted">Student Management System Dashboard</p>
+        </div>
+
+        <!-- 2. IMAGES (Ek ke neeche ek) -->
+        <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 30px;">
+            <img src="~/NewFolder/gate.jpeg" class="shadow-lg" style="width: 100%; border-radius: 12px; object-fit: cover; border: 3px solid white;" />
+            <img src="~/NewFolder/ground.jpeg" class="shadow-lg" style="width: 100%; border-radius: 12px; object-fit: cover; border: 3px solid white;" />
+            <img src="~/NewFolder/lab.jpeg" class="shadow-lg" style="width: 100%; border-radius: 12px; object-fit: cover; border: 3px solid white;" />
+            <img src="~/NewFolder/classroom.jpeg" class="shadow-lg" style="width: 100%; border-radius: 12px; object-fit: cover; border: 3px solid white;" />
+        </div>
+
+        <!-- 3. ABOUT COLLEGE SECTION -->
+        <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 50px;">
+            <h2 style="color: #0d3b66; border-bottom: 3px solid #0d3b66; padding-bottom: 10px; margin-bottom: 20px; display: inline-block;">About College</h2>
+            <p style="font-size: 16px; line-height: 1.8; color: #555; text-align: justify;">
+                Welcome to <strong>BCA College</strong>, a premier institution dedicated to empowering the next generation of IT professionals and tech leaders. Established with a vision to provide world-class education in computer applications, our college boasts state-of-the-art infrastructure, highly experienced faculty, and a dynamic learning environment.
+                <br><br>
+                We emphasize practical knowledge, innovative thinking, and holistic development to ensure our students are industry-ready. From advanced computer labs and digital classrooms to an extensive library and vibrant campus life, BCA College provides the perfect launchpad for a successful career in the ever-evolving world of technology.
+            </p>
+        </div>
+
+        <!-- 4. CONTACT US SECTION -->
+        <div style="background: #0d3b66; color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 40px; text-align: center;">
+            <h2 style="border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; margin-bottom: 25px;">Contact Us</h2>
+
+            <p style="font-size: 18px; margin-bottom: 15px;">
+                📍 <strong>Campus Address:</strong> 101, IT Education Hub, Knowledge Park Road, City Center
+            </p>
+
+            <p style="font-size: 18px; margin-bottom: 15px;">
+                📞 <strong>Phone:</strong> +91 98765 43210 &nbsp; | &nbsp; +91 91234 56789
+            </p>
+
+            <p style="font-size: 18px; margin-bottom: 0;">
+                ✉️ <strong>Email:</strong> admissions@bcacollege.edu.in &nbsp; | &nbsp; info@bcacollege.edu.in
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JavaScript for 3-Line Menu (Hamburger) -->
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "flex"; // Menu dikhayega
+        } else {
+            menu.style.display = "none"; // Menu chhupayega
+        }
+    }
+</script>

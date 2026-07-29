@@ -1,0 +1,91 @@
+﻿@model Studentmanagmentsystem.Models.Student
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-start mb-2">
+        <a href="/Account/Dashboard" class="btn btn-dark fw-bold shadow-sm" style="border-radius: 8px;">
+            🏠 Home
+        </a>
+    </div>
+
+    <h2 class="text-center">Add Student</h2>
+    <hr />
+
+    <form asp-action="Add" method="post">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Student ID (Auto Number)</label>
+                <!-- Yahan readonly lagaya hai taaki lock ho jaye -->
+                <input asp-for="StudentId" class="form-control text-danger fw-bold" readonly style="background-color: #e9ecef; cursor: not-allowed;" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Student Name</label>
+                <input asp-for="StudentName" class="form-control" required placeholder="Enter Student Name" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Enrollment Number</label>
+                <input asp-for="EnrollmentNumber" class="form-control" placeholder="Enter Enrollment Number" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Enter Email" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Mobile Number</label>
+                <input asp-for="MobileNumber" class="form-control" placeholder="Enter Mobile Number" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input asp-for="DateOfBirth" type="date" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Gender</label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Course</label>
+                <!-- Sirf BCA rakha hai aur lock kar diya hai -->
+                <select asp-for="Course" class="form-control" style="background-color: #e9ecef; pointer-events: none;">
+                    <option value="BCA" selected>BCA</option>
+                </select>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Address</label>
+                <textarea asp-for="Address" class="form-control" rows="3" placeholder="Enter Address"></textarea>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Admission Date</label>
+                <input asp-for="AdmissionDate" type="date" class="form-control" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Student</button>
+        <button type="reset" class="btn btn-warning">Clear</button>
+        <a asp-controller="Student" asp-action="Index" class="btn btn-success">View Students</a>
+
+    </form>
+
+</div>

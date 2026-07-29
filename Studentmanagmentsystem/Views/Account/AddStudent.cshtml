@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-4">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-success text-white text-center p-3">
+                    <h4 class="mb-0">👨‍🎓 Add New Student</h4>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Alert Messages -->
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger shadow-sm text-center">
+                            <strong>Error:</strong> @ViewBag.Error
+                        </div>
+                    }
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success shadow-sm text-center">
+                            <strong>Success:</strong> @ViewBag.Success
+                        </div>
+                    }
+
+                    <form action="/Account/AddStudent" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted">Student ID (Auto Number)</label>
+                            <!-- Yahan readonly lagaya hai taaki user change na kar sake -->
+                            <input type="text" name="studentId" class="form-control fw-bold text-danger"
+                                   value="@ViewBag.NextStudentId" readonly style="background-color: #f8f9fa; cursor: not-allowed;" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted">Student Name</label>
+                            <input type="text" name="studentName" class="form-control" required placeholder="Enter Student's Full Name" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-muted">Select Course</label>
+                            <!-- MCA nikal diya gaya hai, ab sirf BCA hai -->
+                            <select name="course" class="form-control" required style="border:1px solid #ced4da; background-color: #f8f9fa;">
+                                <option value="BCA">BCA</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Save Student</button>
+                        <a href="/Account/Dashboard" class="btn btn-secondary w-100 py-2 fw-bold mt-2">Back to Dashboard</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
