@@ -15,10 +15,22 @@ namespace Studentmanagmentsystem.Controllers
             return View();
         }
 
-        // 2. LOGIN - POST 
+       // 2. LOGIN - POST 
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
+            // BYPASS LOGIC: Database check ko band kar diya gaya hai UI testing ke liye
+            if (username == "admin" && password == "123")
+            {
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                ViewBag.Error = "Invalid Username or Password";
+                return View();
+            }
+
+            /* --- NICHE PURANA DATABASE WALA CODE COMMENT KAR DIYA HAI ---
             try
             {
                 using (OracleConnection con = db.GetConnection())
@@ -49,7 +61,10 @@ namespace Studentmanagmentsystem.Controllers
 
             ViewBag.Error = "Invalid Username or Password";
             return View();
+            ------------------------------------------------------------- */
         }
+
+          
 
         // 3. DASHBOARD (MCA Hataya Gaya Hai)
         public IActionResult Dashboard()
